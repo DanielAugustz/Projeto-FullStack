@@ -1,5 +1,6 @@
 const express = require('express');
-const routes = require('./routes');
+const userRoutes = require('./routes/index');
+const carRoutes = require('./routes/carRoutes');
 const logger = require('./middlewares/logger');
 
 const app = express();
@@ -10,7 +11,10 @@ app.use(express.json());
 //Middleware Global
 app.use(logger);
 
-//Rotas
-app.use(routes);
+//Rotas User
+app.use(userRoutes);
+
+//Rotas Cars
+app.use(carRoutes);
 
 module.exports = app;
