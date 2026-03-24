@@ -1,0 +1,22 @@
+docker ps
+
+docker exec -it mysql_fullstack bash
+
+mysql -u root -p 
+
+senha: root
+
+show databases;
+use loja_de_carros
+
+ create table carros( 
+    id int auto_increment primary key, 
+    modelo varchar(255) not null, 
+    marca varchar(255) not null, 
+    ano int(3) not null
+    );
+
+
+Tarefa: tratar o repository 
+        Fazer as requisições faltando delet create oq falta  no car repository e ajusta em controllers
+         
