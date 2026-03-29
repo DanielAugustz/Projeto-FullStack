@@ -23,4 +23,26 @@ async function getCarById(id) {
 
 };
 
-module.exports = {getAllCars, getCarById};
+async function createCar({ modelo, marca, ano }) {
+    const [result] = await db.query(
+        'INSERT INTO carros (modelo, marca, ano) VALUES (?, ?, ?)',
+        [modelo, marca, ano]
+    );
+    return getCarById(result.insertId);
+}
+
+async function updateCar(id, { modelo, marca, ano }) {
+    const [result] = await db.query(
+        'UPDATE carros SET modelo = ?, marca = ?, ano = ? WHERE id = ?',
+        [modelo, marca, ano, id]
+    );
+    if (result.affectedRows === 0) return null;
+    return getCarById(id);
+}
+
+async function deleteCar(id) {
+    const [result] = await db.query('DELETE FROM carros WHERE id = ?', [id]);
+    return result.affectedRows > 0;
+}
+
+module.exports = { getAllCars, getCarById, createCar, updateCar, deleteCar };
